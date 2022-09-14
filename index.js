@@ -47,8 +47,10 @@ class InboundStreamWrapper {
         ...(transport ? ['-rtsp_transport', transport] : []), // this must come before `-i [url]`, see #82
         '-i',
         url,
+        '-f', // force format
         'mpegts',
-        'mpeg1video',
+        '-codec:v', // specify video codec (MPEG1 required for jsmpeg)
+        'mpeg4',
         '-r',
         '30', // 30 fps. any lower and the client can't decode it
         ...additionalFlags,
